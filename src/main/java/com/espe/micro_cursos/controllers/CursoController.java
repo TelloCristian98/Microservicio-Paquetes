@@ -2,12 +2,16 @@ package com.espe.micro_cursos.controllers;
 
 import com.espe.micro_cursos.model.entity.Cursos;
 import com.espe.micro_cursos.services.CursoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,7 +22,12 @@ public class CursoController {
     private CursoService cursoService;
 
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody Cursos curso) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Cursos curso, BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errores = new HashMap<>();
+            result.getAllErrors().forEach(error -> errores.put(error.getDefaultMessage(), error.getDefaultMessage()));
+            return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.save(curso));
     }
 
