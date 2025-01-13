@@ -2,6 +2,7 @@ package com.espe.micro_cursos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Date;
 
@@ -11,12 +12,18 @@ public class Cursos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     @Column(nullable = false)
     private String nombre;
+
     @Column(nullable = false)
+    @NotEmpty
     private String descripcion;
+
     @Column(nullable = false)
+    @NotEmpty
     private int creditos;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creado_en", nullable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
