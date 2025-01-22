@@ -21,3 +21,25 @@ Test the API using PostMan:
 The application will be available at:
 	•	API Base URL: http://localhost:8080/api/paquetes
 
+# Paquetes Turísticos Service - API Documentation
+
+This service allows you to manage "Paquete Turístico" records. Below are examples of how to test the service using the provided API endpoints.
+
+---
+
+## **1. Create a New Paquete Turístico**
+
+**Endpoint**: `POST /api/paquetes`  
+**URL**: `http://localhost:8080/api/paquetes`  
+**Method**: `POST`  
+**Headers**:  
+`Content-Type: application/json`
+
+**Request Body**:
+```json
+{
+    "nombre": "Aventura en la Selva",
+    "descripcion": "Explora la selva amazónica con guías locales.",
+    "duracionDias": 5,
+    "fechaInicio": "2025-06-10"
+}
